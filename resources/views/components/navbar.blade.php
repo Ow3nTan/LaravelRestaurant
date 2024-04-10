@@ -6,7 +6,7 @@
         <div class="container">
             <nav class="navbar">
                 <a href="index.php" class="navbar-brand">
-                    <img src="Design/images/restaurant-logo.png" alt="Restaurant Logo" style="width: 150px;">
+                    <img src="{{asset('images/restaurant-logo.png')}}" alt="Restaurant Logo" style="width: 150px;">
                 </a>
                 <div class="d-flex menu-wrap align-items-center">
                     <div class="mainmenu" id="mainmenu">

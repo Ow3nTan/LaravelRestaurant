@@ -7,14 +7,13 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
 		<meta name="author" content="JAIRI IDRISS">
-		<title>{{$headerTitle}}</title>
+		<title>Vincent Restaurant</title>
 
 		<!-- EXTERNAL CSS LINKS -->
 
-		<link rel="stylesheet" type="text/css" href="Design/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="Design/fonts/css/all.min.css">
-		<link rel="stylesheet" type="text/css" href="Design/css/main.css">
-		<link rel="stylesheet" type="text/css" href="Design/css/responsive.css">
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('fonts/css/all.min.css') }}">
+		{{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}"> --}}
 
 		<!-- GOOGLE FONTS -->
 

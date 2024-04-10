@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use Illuminate\Http\Request;
-
+use App\Models\MenuCategory;
+use App\Models\WebsiteSetting;
+use App\Models\ImageGallery;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $menuCategories = MenuCategory::all();
+        $websiteSettings = WebsiteSetting::all();
+        $menus = Menu::all();
+        $imageGalleries = ImageGallery::all();
+        return view('home', ['menuCategories' => $menuCategories, 'websiteSettings' => $websiteSettings, 
+                            'menu'=>$menus, 'imageGalleries'=>$imageGalleries]);
     }
 }
