@@ -56,7 +56,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="our_qualities_column">
-                            <img src="{{asset('images/quality_food_img.png')}}">
+                            <img src="{{ asset('images/quality_food_img.png') }}">
                             <div class="caption">
                                 <h3>
                                     Quality Foods
@@ -70,7 +70,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="our_qualities_column">
-                            <img src="{{asset('images/fast_delivery_img.png')}}">
+                            <img src="{{ asset('images/fast_delivery_img.png') }}">
                             <div class="caption">
                                 <h3>
                                     Quality Foods
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="our_qualities_column">
-                            <img src="{{asset('images/original_taste_img.png')}}">
+                            <img src="{{ asset('images/original_taste_img.png') }}">
                             <div class="caption">
                                 <h3>
                                     Quality Foods
@@ -156,7 +156,7 @@
                                             <div class="col-md-4 col-lg-3 menu-column">
                                                 <div class="thumbnail" style="cursor:pointer">
                                                     @php
-                                                        $source = 'admin/Uploads/images/' . $menu['menu_image'];
+                                                        $source = asset('anotherImages/' . $menu['menu_image']);
                                                     @endphp
 
                                                     <div class="menu-image">
@@ -195,7 +195,7 @@
                                             <div class="col-md-4 col-lg-3 menu-column">
                                                 <div class="thumbnail" style="cursor:pointer">
                                                     @php
-                                                        $source = 'admin/Uploads/images/' . $menu['menu_image'];
+                                                        $source = asset('anotherImages/' . $menu['menu_image']);
                                                     @endphp
 
                                                     <div class="menu-image">
@@ -238,9 +238,10 @@
                 @foreach ($imageGalleries as $image)
                     <div class = 'col-md-4 col-lg-3' style = 'padding:15px'>
                         @php
-                            $source = $image['image']
+                            $source = asset('anotherImages/' . $image['image']);
                         @endphp
-                        <div style="background-image: url('{{ $source }}') !important;background-repeat: no-repeat;background-position: 50% 50%;background-size: cover;background-clip: border-box;box-sizing: border-box;overflow: hidden;height: 230px;">
+                        <div
+                            style="background-image: url('{{ $source }}'); !important;background-repeat: no-repeat;background-position: 50% 50%;background-size: cover;background-clip: border-box;box-sizing: border-box;overflow: hidden;height: 230px;">
                         </div>
                     </div>
                 @endforeach
@@ -368,7 +369,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="footer_widget">
-                        <img src="{{asset('images/restaurant-logo.png')}}" alt="Restaurant Logo"
+                        <img src="{{ asset('images/restaurant-logo.png') }}" alt="Restaurant Logo"
                             style="width: 150px;margin-bottom: 20px;">
                         <p>
                             Our Restaurnt is one of the bests, provide tasty Menus and Dishes. You can reserve a table
@@ -439,11 +440,8 @@
 
 <x-footer />
 <script type="text/javascript">
-
-    $(document).ready(function()
-    {
-        $('#contact_send').click(function()
-        {
+    $(document).ready(function() {
+        $('#contact_send').click(function() {
             var contact_name = $('#contact_name').val();
             var contact_email = $('#contact_email').val();
             var contact_subject = $('#contact_subject').val();
@@ -451,66 +449,58 @@
 
             var flag = 0;
 
-            if($.trim(contact_name) == "")
-            {
+            if ($.trim(contact_name) == "") {
                 $('#invalid-name').text('This is a required field!');
                 flag = 1;
-            }
-            else
-            {
-                if(contact_name.length < 5)
-                {
+            } else {
+                if (contact_name.length < 5) {
                     $('#invalid-name').text('Length is less than 5 letters!');
                     flag = 1;
                 }
             }
 
-            if(!ValidateEmail(contact_email))
-            {
+            if (!ValidateEmail(contact_email)) {
                 $('#invalid-email').text('Invalid e-mail!');
                 flag = 1;
             }
 
-            if($.trim(contact_subject) == "")
-            {
+            if ($.trim(contact_subject) == "") {
                 $('#invalid-subject').text('This is a required field!');
                 flag = 1;
             }
 
-            if($.trim(contact_message) == "")
-            {
+            if ($.trim(contact_message) == "") {
                 $('#invalid-message').text('This is a required field!');
                 flag = 1;
             }
 
-            if(flag == 0)
-            {
+            if (flag == 0) {
                 $('#sending_load').show();
 
                 $.ajax({
                     url: "Includes/php-files-ajax/contact.php",
                     type: "POST",
-                    data:{contact_name:contact_name, contact_email:contact_email, contact_subject:contact_subject, contact_message:contact_message},
-                    success: function (data) 
-                    {
+                    data: {
+                        contact_name: contact_name,
+                        contact_email: contact_email,
+                        contact_subject: contact_subject,
+                        contact_message: contact_message
+                    },
+                    success: function(data) {
                         $('#contact_status_message').html(data);
                     },
-                    beforeSend: function()
-                    {
+                    beforeSend: function() {
                         $('#sending_load').show();
                     },
-                    complete: function()
-                    {
+                    complete: function() {
                         $('#sending_load').hide();
                     },
-                    error: function(xhr, status, error) 
-                    {
+                    error: function(xhr, status, error) {
                         alert("Internal ERROR has occured, please, try later!");
                     }
                 });
             }
-            
+
         });
-    }); 
-    
+    });
 </script>
