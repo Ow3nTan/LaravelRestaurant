@@ -74,7 +74,6 @@
                 </div>
             </div>
         </nav> --}}
-        <x-navbar/>
         <main class="py-4">
             @yield('content')
         </main>

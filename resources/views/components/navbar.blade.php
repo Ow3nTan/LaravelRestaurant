@@ -11,15 +11,15 @@
                 <div class="d-flex menu-wrap align-items-center">
                     <div class="mainmenu" id="mainmenu">
                         <ul class="nav">
-                            <li><a href="index.php#home">HOME</a></li>
-                            <li><a href="index.php#menus">MENUS</a></li>
-                            <li><a href="index.php#gallery">GALLERY</a></li>
-                            <li><a href="index.php#about">ABOUT</a></li>
-                            <li><a href="index.php#contact">CONTACT</a></li>
+                            <li><a href="#home">HOME</a></li>
+                            <li><a href="#menus">MENUS</a></li>
+                            <li><a href="#gallery">GALLERY</a></li>
+                            <li><a href="#about">ABOUT</a></li>
+                            <li><a href="#contact">CONTACT</a></li>
                         </ul>
                     </div>
                     <div class="header-btn" style="margin-left:10px">
-                        <a href="table-reservation.php" target="_blank" class="menu-btn">Reserve Table</a>
+                        <a href="{{url('tableReserve')}}" target="_blank" class="menu-btn">Reserve Table</a>
                     </div>
                 </div>
             </nav>
