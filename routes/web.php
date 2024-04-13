@@ -24,5 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('logout',[LoginController::class,'logout']);
-Route::view('tableReserve','table-reservation');
+Route::get('logout', [LoginController::class, 'logout']);
+Route::view('tableReserve', 'table-reservation');
+
+Route::view('dashboard', 'dashboard');
