@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\WebsiteSettingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MenuCategoryController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,4 +28,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('logout', [LoginController::class, 'logout']);
 Route::view('tableReserve', 'table-reservation');
 
-Route::view('dashboard', 'dashboard');
+Route::view('dashboard', '/admin/dashboard');
+Route::view('menu_category', '/admin/menu_category');
+Route::post('/ajax-files/menu_categories_ajax', [MenuCategoryController::class, 'handleAjaxRequest']);
+Route::post('/ajax-files/dashboard_ajax', [DashboardController::class, 'handleAjaxRequest']);

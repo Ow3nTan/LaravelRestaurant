@@ -1,3 +1,6 @@
+@extends('layouts.app')
+@extends('admin.layouts.admin_layout')
+
 @php
     use App\Models\Client;
     use App\Models\PlacedOrder;
@@ -6,6 +9,8 @@
     use App\Models\Inorder;
     use App\Models\MenuCategory;
 @endphp
+
+<x-header data="Dashboard" />
 
 @php
     // session_start();
@@ -726,7 +731,7 @@
         var do_ = 'Deliver_Order';
 
         $.ajax({
-            url: "/ajax_files/dashboard_ajax.php",
+            url: "/ajax-files/dashboard_ajax",
             type: "POST",
             data: {
                 do_: do_,
@@ -757,7 +762,7 @@
 
 
         $.ajax({
-            url: "/ajax_files/dashboard_ajax.php",
+            url: "/ajax-files/dashboard_ajax",
             type: "POST",
             data: {
                 order_id: order_id,
