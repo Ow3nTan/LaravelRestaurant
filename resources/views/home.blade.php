@@ -33,7 +33,7 @@
                                     Italian Pizza With Cherry Tomatoes and Green Basil
                                 </p>
                                 <div style="display: flex;">
-                                    <a href="order_food.php" target="_blank" class="bttn_style_1"
+                                    <a href="order_food" target="_blank" class="bttn_style_1"
                                         style="margin-right: 10px; display: flex;justify-content: center;align-items: center;">
                                         Order Now
                                         <i class="fas fa-angle-right"></i>
@@ -156,6 +156,7 @@
 
                                         <div class='row'>
                                             @foreach ($rows_menus as $menu)
+
                                                 <div class="col-md-4 col-lg-3 menu-column">
                                                     <div class="thumbnail" style="cursor:pointer">
                                                         @php
@@ -282,52 +283,53 @@
                     <div class="col-lg-6 sm-padding">
                         <div class="contact-form">
                             <div id="contact_ajax_form" class="contactForm">
-                                <div class="form-group colum-row row">
-                                    <div class="col-sm-6">
-                                        <input type="text" id="contact_name" name="name"
-                                            oninput="document.getElementById('invalid-name').innerHTML = ''"
-                                            onkeyup="this.value=this.value.replace(/[^\sa-zA-Z]/g,'');" class="form-control"
-                                            placeholder="Name">
-                                        <div class="invalid-feedback" id="invalid-name" style="display: block">
-
+                                <form method="POST" action="{{ url('contact') }}">
+                                    @csrf
+                                    <div class="form-group colum-row row">
+                                        <div class="col-sm-6">
+                                            <input type="text" id="contact_name" name="name"
+                                                 class="form-control" placeholder="Name">
+                                            @error('name')
+                                                <div class="invalid-feedback" style="display: block">{{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="email" id="contact_email" name="email"
+                                                 class="form-control" placeholder="Email">
+                                            @error('email')
+                                                <div class="invalid-feedback" style="display: block">{{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="email" id="contact_email" name="email"
-                                            oninput="document.getElementById('invalid-email').innerHTML = ''"
-                                            class="form-control" placeholder="Email">
-                                        <div class="invalid-feedback" id="invalid-email" style="display: block">
-
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <input type="text" id="contact_subject" name="subject"
+                                                 class="form-control" placeholder="Subject">
+                                            @error('subject')
+                                                <div class="invalid-feedback" style="display: block">{{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <input type="text" id="contact_subject" name="subject"
-                                            oninput="document.getElementById('invalid-subject').innerHTML = ''"
-                                            onkeyup="this.value=this.value.replace(/[^\sa-zA-Z]/g,'');"
-                                            class="form-control" placeholder="Subject">
-                                        <div class="invalid-feedback" id="invalid-subject" style="display: block">
-
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <textarea id="contact_message" name="message" cols="30" rows="5" class="form-control message"
+                                                placeholder="Message"></textarea>
+                                            @error('message')
+                                                <div class="invalid-feedback" style="display: block">{{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <textarea id="contact_message" name="message" oninput="document.getElementById('invalid-message').innerHTML = ''"
-                                            cols="30" rows="5" class="form-control message" placeholder="Message"></textarea>
-                                        <div class="invalid-feedback" id="invalid-message" style="display: block">
-
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <button type="submit" id="contact_send" class="bttn_style_2">Send
+                                                Message</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <button id="contact_send" class="bttn_style_2">Send Message</button>
-                                    </div>
-                                </div>
-                                <div id="sending_load" style="display: none;">Sending...</div>
-                                <div id="contact_status_message"></div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -442,7 +444,7 @@
     @endsection
 
     <x-footer />
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function() {
             $('#contact_send').click(function() {
                 var contact_name = $('#contact_name').val();
@@ -506,4 +508,4 @@
 
             });
         });
-    </script>
+    </script> --}}

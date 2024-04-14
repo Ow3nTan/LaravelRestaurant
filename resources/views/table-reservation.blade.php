@@ -55,7 +55,7 @@
     <!-- START ORDER FOOD SECTION -->
 
     <section style="
-    background: url(Design/images/food_pic.jpg);
+    background: url(images/food_pic.jpg);
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: cover;">
