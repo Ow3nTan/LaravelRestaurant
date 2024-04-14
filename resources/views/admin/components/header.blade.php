@@ -8,12 +8,11 @@
         <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
         <meta name="author" content="JAIRI IDRISS">
 
-
         <!-- EXTERNAL CSS LINKS -->
 
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('fonts/css/all.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('admin/design/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('admin/design/css/main.css') }}">
+        <link rel="stylesheet" type="text/css" href="admin/design//fonts/css/all.min.css">
 
         <!-- GOOGLE FONTS -->
 

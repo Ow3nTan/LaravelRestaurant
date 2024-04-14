@@ -19,6 +19,8 @@
 
     <body>
         @include('admin.components.navbar')
+        @include('admin.components.header')
+
 
         <div class="container">
             @yield('content')
