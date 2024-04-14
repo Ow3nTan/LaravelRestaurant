@@ -1,11 +1,10 @@
-@extends('layouts.app')
 @extends('admin.layouts.admin_layout')
 
 @php
     use App\Models\MenuCategory;
 @endphp
 
-<x-header data="Menu Category" />
+<x-header />
 
 @section('scripts')
     @parent
@@ -100,7 +99,6 @@
                             <td>{{ $category->category_id }}</td>
                             <td style="text-transform:capitalize">{{ $category->category_name }}</td>
                             <td>
-                                /****/
                                 @php
                                     $delete_data = 'delete_' . $category->category_id;
                                 @endphp
@@ -142,7 +140,6 @@
                                         </div>
                                     </li>
                                 </ul>
-                                /****/
                             </td>
                         </tr>
                     @endforeach
