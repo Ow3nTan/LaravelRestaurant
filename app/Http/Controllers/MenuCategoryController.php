@@ -49,6 +49,7 @@ class MenuCategoryController extends Controller
         MenuCategory::where('category_id', $categoryId)->delete();
 
         return response()->json([
+            'alert' => 'Success',
             'message' => 'The category has been deleted successfully!'
         ]);
     }

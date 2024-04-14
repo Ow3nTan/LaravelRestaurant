@@ -10,4 +10,5 @@ class MenuCategory extends Model
     use HasFactory;
 
     protected $table = 'menu_category';
+    protected $fillable = ['category_name'];
 }
