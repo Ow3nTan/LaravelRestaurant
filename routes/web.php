@@ -30,15 +30,20 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('logout', [LoginController::class, 'logout']);
 Route::view('tableReserve', 'table-reservation');
 
-Route::view('dashboard', '/admin/dashboard');
-Route::view('menu_category', '/admin/menu_category');
-Route::post('/ajax-files/menu_categories_ajax', [MenuCategoryController::class, 'handleAjaxRequest']);
-Route::post('/ajax-files/dashboard_ajax', [DashboardController::class, 'handleAjaxRequest']);
 
-Route::post('contact',[ContactController::class,'send']);
-Route::get('logout',[LoginController::class,'logout']);
-Route::view('tableReserve','table-reservation');
+
+Route::post('contact', [ContactController::class, 'send']);
+Route::get('logout', [LoginController::class, 'logout']);
+Route::view('tableReserve', 'table-reservation');
 
 // Route::view('order_food','order-food');
-Route::post('storeOrder',[OrderFoodController::class,'store']);
-Route::get('order_food',[OrderFoodController::class,'index']);
+Route::post('storeOrder', [OrderFoodController::class, 'store']);
+Route::get('order_food', [OrderFoodController::class, 'index']);
+
+/* Admin Routes */
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::view('dashboard', '/admin/dashboard');
+    Route::view('menu_category', '/admin/menu_category');
+    Route::post('/ajax-files/menu_categories_ajax', [MenuCategoryController::class, 'handleAjaxRequest']);
+    Route::post('/ajax-files/dashboard_ajax', [DashboardController::class, 'handleAjaxRequest']);
+});

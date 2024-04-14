@@ -41,7 +41,7 @@
                 </div>
             </li>
             <li class="main-li webpage-btn">
-                <a class="nav-item-button" href="../" target="_blank">
+                <a class="nav-item-button" href="../home">
                     <i class="fas fa-eye"></i>
                     <span>View website</span>
                 </a>
