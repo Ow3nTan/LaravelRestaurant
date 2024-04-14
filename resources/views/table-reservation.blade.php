@@ -283,7 +283,7 @@
         }
     </style>
 
-    <section class="restaurant_details" style="background: url(Design/images/food_pic_2.jpg);
+    <section class="restaurant_details" style="background: url(images/food_pic_2.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 50% 0%;
