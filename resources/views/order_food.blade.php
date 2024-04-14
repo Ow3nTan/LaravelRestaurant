@@ -194,7 +194,7 @@ $pageTitle = 'Order Food';
             $client_id = $stmtgetCurrentClientID->fetch();
     
             $stmtClient = $con->prepare("insert into clients(client_name,client_phone,client_email) 
-                                            values(?,?,?)");
+                                                            values(?,?,?)");
             $stmtClient->execute([$client_full_name, $client_phone_number, $client_email]);
     
             $stmtgetCurrentOrderID = $con->prepare("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'restaurant_website' AND TABLE_NAME = 'placed_orders'");
@@ -246,58 +246,38 @@ $pageTitle = 'Order Food';
             </div>
 
             <div>
-                <?php
-						$stmt = $con->prepare("Select * from menu_categories");
-                    	$stmt->execute();
-                    	$menu_categories = $stmt->fetchAll();
-
-
-                    	foreach($menu_categories as $category)
-                    	{
-                    		?>
-                <div class="text_header">
-                    <span>
-                        <?php echo $category['category_name']; ?>
-                    </span>
-                </div>
-                <div class="items_tab">
-                    <?php
-				        				$stmt = $con->prepare("Select * from menus where category_id = ?");
-				                    	$stmt->execute(array($category['category_id']));
-				                    	$rows = $stmt->fetchAll();
-
-				                    	foreach($rows as $row)
-				                    	{
-				                        	echo "<div class='itemListElement'>";
-				                            	echo "<div class = 'item_details'>";
-				                                	echo "<div>";
-				                                    	echo $row['menu_name'];
-				                                	echo "</div>";
-				                                	echo "<div class = 'item_select_part'>";
-				                                    	echo "<div class = 'menu_price_field'>";
-				    										echo "<span style = 'font-weight: bold;'>";
-				                                    			echo $row['menu_price']."$";
-				                                    		echo "</span>";
-				                                    	echo "</div>";
-				                                    ?>
-                    <div class="select_item_bttn">
-                        <div class="btn-group-toggle" data-toggle="buttons">
-                            <label class="menu_label item_label btn btn-secondary">
-                                <input type="checkbox" name="selected_menus[]" value="<?php echo $row['menu_id']; ?>"
-                                    autocomplete="off">Select
-                            </label>
-                        </div>
+                @foreach ($menu_categories as $category)
+                    <div class="text_header">
+                        <span>
+                            {{ $category['category_name'] }}
+                        </span>
                     </div>
-                    <?php
-				                                	echo "</div>";
-				                            	echo "</div>";
-				                        	echo "</div>";
-				                    	}
-				            		?>
-                </div>
-                <?php
-                    	}
-					?>
+                    <div class="items_tab">
+                        @foreach ($rows as $row)
+                            <div class='itemListElement'>
+                                <div class = 'item_details'>
+                                    <div>{{ $row['menu_name'] }}</div>
+                                    <div class = 'item_select_part'>
+                                        <div class = 'menu_price_field'>
+                                            <span style = 'font-weight: bold;'>
+                                                {{ $row['menu_price'] . "$" }}
+                                            </span>
+                                        </div>
+
+                                        <div class="select_item_bttn">
+                                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                <label class="menu_label item_label btn btn-secondary">
+                                                    <input type="checkbox" name="selected_menus[]"
+                                                        value={{$row['menu_id']}} autocomplete="off">Select
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endforeach
             </div>
         </div>
 
@@ -389,7 +369,7 @@ $pageTitle = 'Order Food';
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="footer_widget">
-                    <img src="Design/images/restaurant-logo.png" alt="Restaurant Logo"
+                    <img src="images/restaurant-logo.png" alt="Restaurant Logo"
                         style="width: 150px;margin-bottom: 20px;">
                     <p>
                         Our Restaurnt is one of the bests, provide tasty Menus and Dishes. You can reserve a table or
@@ -454,7 +434,7 @@ $pageTitle = 'Order Food';
 
 <!-- FOOTER BOTTOM  -->
 
-<?php include 'Includes/templates/footer.php'; ?>
+<x-footer/>
 
 
 <!-- JS SCRIPTS -->

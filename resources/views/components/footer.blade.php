@@ -1,19 +1,38 @@
-    </div><!-- inside-page -->
-    </section><!-- content-wrapper -->
-    </div><!-- content -->
+<footer class="footer_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 xs-padding">
+                <div class="copyright">
+                    ©
+                    <script type="text/javascript">
+                        document.write(new Date().getFullYear())
+                    </script>
+                    Vincent Restaurant Powered by JAIRI Idriss
+                </div>
+            </div>
+            <div class="col-md-6 xs-padding">
+                <ul class="footer_social">
+                    <li><a href="#">Orders</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Report Problem</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 
 
-    <!-- INCLUDE JS SCRIPTS -->
+<!-- INCLUDE JS SCRIPTS -->
 
-		<script src="Design/js/jquery.min.js"></script>
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-		<script src="Design/js/bootstrap.bundle.min.js"></script>
-		<script src="{{asset('js/app.js')}}"></script>
+<script src="Design/js/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="Design/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
-    </body>
+</body>
 
-    <!-- END BODY TAG -->
+<!-- END BODY TAG -->
 
-    </html>
+</html>
 
-    <!-- END HTML TAG -->
+<!-- END HTML TAG -->

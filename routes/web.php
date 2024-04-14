@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrderFoodController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,4 +38,7 @@ Route::post('/ajax-files/dashboard_ajax', [DashboardController::class, 'handleAj
 Route::post('contact',[ContactController::class,'send']);
 Route::get('logout',[LoginController::class,'logout']);
 Route::view('tableReserve','table-reservation');
-Route::view('order_food','order-food');
+
+// Route::view('order_food','order-food');
+Route::post('storeOrder',[OrderFoodController::class,'store']);
+Route::get('order_food',[OrderFoodController::class,'index']);

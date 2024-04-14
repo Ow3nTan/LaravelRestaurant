@@ -10,4 +10,8 @@ class Menu extends Model
     use HasFactory;
 
     protected $table = 'menu';
+
+    public function category(){
+        return $this->belongsTo(MenuCategory::class);
+    }
 }

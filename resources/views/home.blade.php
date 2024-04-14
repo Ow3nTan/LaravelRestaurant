@@ -16,7 +16,6 @@
 
         <x-header />
         <x-navbar />
-        <div class="container">
             <section class="home-section" id="home">
                 <div class="container">
                     <div class="row" style="flex-wrap: nowrap;">
@@ -156,7 +155,6 @@
 
                                         <div class='row'>
                                             @foreach ($rows_menus as $menu)
-
                                                 <div class="col-md-4 col-lg-3 menu-column">
                                                     <div class="thumbnail" style="cursor:pointer">
                                                         @php
@@ -287,16 +285,16 @@
                                     @csrf
                                     <div class="form-group colum-row row">
                                         <div class="col-sm-6">
-                                            <input type="text" id="contact_name" name="name"
-                                                 class="form-control" placeholder="Name">
+                                            <input type="text" id="contact_name" name="name" class="form-control"
+                                                placeholder="Name">
                                             @error('name')
                                                 <div class="invalid-feedback" style="display: block">{{ $message }}
                                                 </div>
                                             @enderror
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="email" id="contact_email" name="email"
-                                                 class="form-control" placeholder="Email">
+                                            <input type="email" id="contact_email" name="email" class="form-control"
+                                                placeholder="Email">
                                             @error('email')
                                                 <div class="invalid-feedback" style="display: block">{{ $message }}
                                                 </div>
@@ -306,7 +304,7 @@
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <input type="text" id="contact_subject" name="subject"
-                                                 class="form-control" placeholder="Subject">
+                                                class="form-control" placeholder="Subject">
                                             @error('subject')
                                                 <div class="invalid-feedback" style="display: block">{{ $message }}
                                                 </div>
@@ -439,11 +437,11 @@
 
         <!-- FOOTER BOTTOM  -->
 
-        {{-- @include('footer') --}}
+        <x-footer />
         </div>
     @endsection
 
-    <x-footer />
+
     {{-- <script type="text/javascript">
         $(document).ready(function() {
             $('#contact_send').click(function() {
