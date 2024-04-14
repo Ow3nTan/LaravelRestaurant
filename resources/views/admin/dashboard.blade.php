@@ -20,7 +20,13 @@
 {{-- @if (session('username_restaurant_qRewacvAqzA') && session('password_restaurant_qRewacvAqzA')) --}}
 
 
-@push('scripts')
+
+@section('content')
+    @php
+        $pageTitle = 'Dashboard';
+    @endphp
+    <x-header data="Dashboard" />
+
     <script type="text/javascript">
         var vertical_menu = document.getElementById("vertical-menu");
         var current = vertical_menu.getElementsByClassName("active_link");
@@ -29,13 +35,6 @@
         }
         vertical_menu.getElementsByClassName('dashboard_link')[0].classList.add("active_link");
     </script>
-@endpush
-
-@section('content')
-    @php
-        $pageTitle = 'Dashboard';
-    @endphp
-    <x-header data="Dashboard" />
 
     <div class="row">
         <div class="col-sm-6 col-lg-3">
@@ -145,10 +144,12 @@
                 Orders</button>
         </div>
 
+        <!-- TABS CONTENT -->
 
         <div class="card-body">
             <div class='responsive-table'>
 
+                <!-- RECENT ORDERS -->
 
                 <table class="table X-table tabcontent_orders" id="recent_orders" style="display:table">
                     <thead>
@@ -212,7 +213,7 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                        {{ $total_price }}$
+                                        {{ $total_price }} $
                                     </td>
                                     <td>
                                         <button class='btn btn-info btn-sm rounded-0' type='button' data-toggle='modal'
@@ -235,11 +236,11 @@
                                                     <div class='modal-body'>
                                                         <ul>
                                                             <li><span style='font-weight: bold;'>Full name: </span>
-                                                                {{ $order->client_name }}</li>
+                                                                {{ $order->client->client_name }}</li>
                                                             <li><span style='font-weight: bold;'>Phone number:
-                                                                </span>{{ $order->client_phone }}</li>
+                                                                </span>{{ $order->client->client_phone }}</li>
                                                             <li><span style='font-weight: bold;'>E-mail:
-                                                                </span>{{ $order->client_email }}</li>
+                                                                </span>{{ $order->client->client_email }}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -722,67 +723,68 @@
         // exit();
     @endphp
 @endif --}}
+
+    <!-- JS SCRIPTS -->
+    <script type="text/javascript">
+        // WHEN DELIVER ORDER BUTTON IS CLICKED
+
+        $('.deliver_order_button').click(function() {
+
+            var order_id = $(this).data('id');
+            var do_ = 'Deliver_Order';
+
+            $.ajax({
+                url: "/ajax-files/dashboard_ajax",
+                type: "POST",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    do_: do_,
+                    order_id: order_id,
+                },
+                success: function(data) {
+                    $('#deliver_order' + order_id).modal('hide');
+                    swal("Order Delivered", "The order has been marked as delivered", "success").then((
+                        value) => {
+                        window.location.replace("dashboard");
+                    });
+
+                },
+                error: function(xhr, status, error) {
+                    alert('AN ERROR HAS BEEN OCCURRED WHILE TRYING TO PROCESS YOUR REQUEST!');
+                }
+            });
+        });
+
+        // WHEN CANCEL ORDER BUTTON IS CLICKED
+
+        $('.cancel_order_button').click(function() {
+
+            var order_id = $(this).data('id');
+            var cancellation_reason_order = $('#cancellation_reason_order_' + order_id).val();
+
+            var do_ = 'Cancel_Order';
+
+
+            $.ajax({
+                url: "/ajax-files/dashboard_ajax",
+                type: "POST",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    order_id: order_id,
+                    cancellation_reason_order: cancellation_reason_order,
+                    do_: do_
+                },
+                success: function(data) {
+                    $('#cancel_order' + order_id).modal('hide');
+                    swal("Order Canceled", "The order has been canceled successfully", "success").then((
+                        value) => {
+                        window.location.replace("dashboard");
+                    });
+                },
+                error: function(xhr, status, error) {
+                    alert('AN ERROR HAS BEEN OCCURRED WHILE TRYING TO PROCESS YOUR REQUEST!');
+                }
+            });
+        });
+    </script>
 @endsection
-
-<!-- JS SCRIPTS -->
-
-<script type="text/javascript">
-    // WHEN DELIVER ORDER BUTTON IS CLICKED
-
-    $('.deliver_order_button').click(function() {
-
-        var order_id = $(this).data('id');
-        var do_ = 'Deliver_Order';
-
-        $.ajax({
-            url: "/ajax-files/dashboard_ajax",
-            type: "POST",
-            data: {
-                do_: do_,
-                order_id: order_id,
-            },
-            success: function(data) {
-                $('#deliver_order' + order_id).modal('hide');
-                swal("Order Delivered", "The order has been marked as delivered", "success").then((
-                    value) => {
-                    window.location.replace("dashboard.php");
-                });
-
-            },
-            error: function(xhr, status, error) {
-                alert('AN ERROR HAS BEEN OCCURRED WHILE TRYING TO PROCESS YOUR REQUEST!');
-            }
-        });
-    });
-
-    // WHEN CANCEL ORDER BUTTON IS CLICKED
-
-    $('.cancel_order_button').click(function() {
-
-        var order_id = $(this).data('id');
-        var cancellation_reason_order = $('#cancellation_reason_order_' + order_id).val();
-
-        var do_ = 'Cancel_Order';
-
-
-        $.ajax({
-            url: "/ajax-files/dashboard_ajax",
-            type: "POST",
-            data: {
-                order_id: order_id,
-                cancellation_reason_order: cancellation_reason_order,
-                do_: do_
-            },
-            success: function(data) {
-                $('#cancel_order' + order_id).modal('hide');
-                swal("Order Canceled", "The order has been canceled successfully", "success").then((
-                    value) => {
-                    window.location.replace("dashboard.php");
-                });
-            },
-            error: function(xhr, status, error) {
-                alert('AN ERROR HAS BEEN OCCURRED WHILE TRYING TO PROCESS YOUR REQUEST!');
-            }
-        });
-    });
-</script>
