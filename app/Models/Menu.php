@@ -10,8 +10,12 @@ class Menu extends Model
     use HasFactory;
 
     protected $table = 'menu';
+    protected $fillable = ['name', 'description', 'price', 'image', 'category_id'];
+    protected $primaryKey = 'menu_id';
 
-    public function category(){
+
+    public function category()
+    {
         return $this->belongsTo(MenuCategory::class);
     }
 }
