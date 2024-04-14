@@ -4,22 +4,6 @@
     use App\Models\MenuCategory;
 @endphp
 
-<x-header />
-
-@section('scripts')
-    @parent
-    <script type="text/javascript">
-        var vertical_menu = document.getElementById("vertical-menu");
-        var current = vertical_menu.getElementsByClassName("active_link");
-
-        if (current.length > 0) {
-            current[0].classList.remove("active_link");
-        }
-
-        vertical_menu.getElementsByClassName('menu_categories_link')[0].className += " active_link";
-    </script>
-@endsection
-
 @section('styles')
     @parent
     <style type="text/css">
@@ -37,6 +21,19 @@
         $pageTitle = 'Menu Categories';
         $menu_categories = MenuCategory::all();
     @endphp
+    <x-header data="Menu Categories" />
+
+
+    <script type="text/javascript">
+        var vertical_menu = document.getElementById("vertical-menu");
+        var current = vertical_menu.getElementsByClassName("active_link");
+
+        if (current.length > 0) {
+            current[0].classList.remove("active_link");
+        }
+
+        vertical_menu.getElementsByClassName('menu_categories_link')[0].className += " active_link";
+    </script>
 
     <div class="card">
         <div class="card-header">
@@ -147,68 +144,75 @@
             </table>
         </div>
     </div>
-@endsection
 
-@section('scripts')
-    @parent
+    <!-- JS SCRIPTS -->
     <script type="text/javascript">
         // When add category button is clicked
+        $(document).ready(function() {
+            $('#add_category_bttn').click(function() {
+                var category_name = $("#category_name_input").val();
+                var do_ = "Add";
 
-        $('#add_category_bttn').click(function() {
-            var category_name = $("#category_name_input").val();
-            var do_ = "Add";
+                if ($.trim(category_name) == "") {
+                    $('#required_category_name').css('display', 'block');
+                } else {
+                    $.ajax({
+                        url: "/ajax-files/menu_categories_ajax",
+                        method: "POST",
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            category_name: category_name,
+                            do: do_
+                        },
+                        dataType: "JSON",
+                        success: function(data) {
+                            if (data['alert'] == "Warning") {
+                                swal("Warning", data['message'], "warning").then((value) => {});
+                            }
+                            if (data['alert'] == "Success") {
+                                swal("New Category", data['message'], "success").then((
+                                    value) => {
+                                    window.location.replace("menu_category");
+                                });
+                            }
 
-            if ($.trim(category_name) == "") {
-                $('#required_category_name').css('display', 'block');
-            } else {
+                        },
+                        error: function(xhr, status, error) {
+                            alert(
+                                'AN ERROR HAS BEEN ENCOUNTERED WHILE TRYING TO EXECUTE YOUR REQUEST'
+                            );
+                        }
+                    });
+                }
+            });
+
+            // When delete category button is clicked
+
+            $('.delete_category_bttn').click(function() {
+                var category_id = $(this).data('id');
+                var do_ = "Delete";
+
                 $.ajax({
                     url: "/ajax-files/menu_categories_ajax",
                     method: "POST",
                     data: {
-                        category_name: category_name,
+                        _token: '{{ csrf_token() }}',
+                        category_id: category_id,
                         do: do_
                     },
-                    dataType: "JSON",
                     success: function(data) {
-                        if (data['alert'] == "Warning") {
-                            swal("Warning", data['message'], "warning").then((value) => {});
-                        }
-                        if (data['alert'] == "Success") {
-                            swal("New Category", data['message'], "success").then((value) => {
-                                window.location.replace("menu_categories.php");
+                        swal("Delete Category", "The category has been deleted successfully!",
+                                "success")
+                            .then((value) => {
+                                window.location.replace("menu_category");
                             });
-                        }
-
                     },
                     error: function(xhr, status, error) {
-                        alert('AN ERROR HAS BEEN ENCOUNTERED WHILE TRYING TO EXECUTE YOUR REQUEST');
+                        alert(
+                            'AN ERROR HAS BEEN ENCOUNTERED WHILE TRYING TO EXECUTE YOUR REQUEST'
+                        );
                     }
                 });
-            }
-        });
-
-        // When delete category button is clicked
-
-        $('.delete_category_bttn').click(function() {
-            var category_id = $(this).data('id');
-            var do_ = "Delete";
-
-            $.ajax({
-                url: "/ajax-files/menu_categories_ajax",
-                method: "POST",
-                data: {
-                    category_id: category_id,
-                    do: do_
-                },
-                success: function(data) {
-                    swal("Delete Category", "The category has been deleted successfully!", "success")
-                        .then((value) => {
-                            window.location.replace("menu_categories.php");
-                        });
-                },
-                error: function(xhr, status, error) {
-                    alert('AN ERROR HAS BEEN ENCOUNTERED WHILE TRYING TO EXECUTE YOUR REQUEST');
-                }
             });
         });
     </script>
