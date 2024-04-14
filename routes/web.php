@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\WebsiteSettingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,5 +25,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('contact',[ContactController::class,'send']);
 Route::get('logout',[LoginController::class,'logout']);
 Route::view('tableReserve','table-reservation');
+Route::view('order_food','order-food');
