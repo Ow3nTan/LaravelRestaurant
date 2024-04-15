@@ -16,218 +16,217 @@
 
         <x-header />
         <x-navbar />
-            <section class="home-section" id="home">
-                <div class="container">
-                    <div class="row" style="flex-wrap: nowrap;">
-                        <div class="col-md-6 home-left-section">
-                            <div style="padding: 100px 0px; color: white;">
-                                <h1>
-                                    VINCENT PIZZA.
-                                </h1>
-                                <h2>
-                                    MAKING PEOPLE HAPPY
-                                </h2>
-                                <hr>
+        <section class="home-section" id="home">
+            <div class="container">
+                <div class="row" style="flex-wrap: nowrap;">
+                    <div class="col-md-6 home-left-section">
+                        <div style="padding: 100px 0px; color: white;">
+                            <h1>
+                                VINCENT PIZZA.
+                            </h1>
+                            <h2>
+                                MAKING PEOPLE HAPPY
+                            </h2>
+                            <hr>
+                            <p>
+                                Italian Pizza With Cherry Tomatoes and Green Basil
+                            </p>
+                            <div style="display: flex;">
+                                <a href="order_food" target="_blank" class="bttn_style_1"
+                                    style="margin-right: 10px; display: flex;justify-content: center;align-items: center;">
+                                    Order Now
+                                    <i class="fas fa-angle-right"></i>
+                                </a>
+                                <a href="#menus" class="bttn_style_2"
+                                    style="display: flex;justify-content: center;align-items: center;">
+                                    VIEW MENU
+                                    <i class="fas fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- OUR QUALITIES SECTION -->
+
+        <section class="our_qualities" style="padding:100px 0px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="our_qualities_column">
+                            <img src="{{ asset('images/quality_food_img.png') }}">
+                            <div class="caption">
+                                <h3>
+                                    Quality Foods
+                                </h3>
                                 <p>
-                                    Italian Pizza With Cherry Tomatoes and Green Basil
+                                    Sit amet, consectetur adipiscing elit quisque eget maximus velit,
+                                    non eleifend libero curabitur dapibus mauris sed leo cursus aliquetcras suscipit.
                                 </p>
-                                <div style="display: flex;">
-                                    <a href="order_food" target="_blank" class="bttn_style_1"
-                                        style="margin-right: 10px; display: flex;justify-content: center;align-items: center;">
-                                        Order Now
-                                        <i class="fas fa-angle-right"></i>
-                                    </a>
-                                    <a href="#menus" class="bttn_style_2"
-                                        style="display: flex;justify-content: center;align-items: center;">
-                                        VIEW MENU
-                                        <i class="fas fa-angle-right"></i>
-                                    </a>
-                                </div>
                             </div>
                         </div>
-
                     </div>
-                </div>
-            </section>
-
-            <!-- OUR QUALITIES SECTION -->
-
-            <section class="our_qualities" style="padding:100px 0px;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="our_qualities_column">
-                                <img src="{{ asset('images/quality_food_img.png') }}">
-                                <div class="caption">
-                                    <h3>
-                                        Quality Foods
-                                    </h3>
-                                    <p>
-                                        Sit amet, consectetur adipiscing elit quisque eget maximus velit,
-                                        non eleifend libero curabitur dapibus mauris sed leo cursus aliquetcras suscipit.
-                                    </p>
-                                </div>
+                    <div class="col-md-4">
+                        <div class="our_qualities_column">
+                            <img src="{{ asset('images/fast_delivery_img.png') }}">
+                            <div class="caption">
+                                <h3>
+                                    Quality Foods
+                                </h3>
+                                <p>
+                                    Sit amet, consectetur adipiscing elit quisque eget maximus velit,
+                                    non eleifend libero curabitur dapibus mauris sed leo cursus aliquetcras suscipit.
+                                </p>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="our_qualities_column">
-                                <img src="{{ asset('images/fast_delivery_img.png') }}">
-                                <div class="caption">
-                                    <h3>
-                                        Quality Foods
-                                    </h3>
-                                    <p>
-                                        Sit amet, consectetur adipiscing elit quisque eget maximus velit,
-                                        non eleifend libero curabitur dapibus mauris sed leo cursus aliquetcras suscipit.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="our_qualities_column">
-                                <img src="{{ asset('images/original_taste_img.png') }}">
-                                <div class="caption">
-                                    <h3>
-                                        Quality Foods
-                                    </h3>
-                                    <p>
-                                        Sit amet, consectetur adipiscing elit quisque eget maximus velit,
-                                        non eleifend libero curabitur dapibus mauris sed leo cursus aliquetcras suscipit.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-                </div>
-            </section>
-
-            <!-- OUR MENUS SECTION -->
-
-            <section class="our_menus" id="menus">
-                <div class="container">
-                    <h2 style="text-align: center;margin-bottom: 30px">DISCOVER OUR MENUS</h2>
-                    <div class="menus_tabs">
-                        <div class="menus_tabs_picker">
-                            <ul style="text-align: center;margin-bottom: 70px">
-                                @php
-                                    $menuCategoriesCount = 0;
-                                @endphp
-                                @foreach ($menuCategories as $menuCategory)
-                                    @if ($menuCategoriesCount == 0)
-                                        <li class="menu_category_name tab_category_links active_category"
-                                            onclick="showCategoryMenus(event, '{{ str_replace(' ', '', $menuCategory['category_name']) }}')">
-                                            {{ $menuCategory['category_name'] }}
-                                        </li>
-                                    @else
-                                        <li class="menu_category_name tab_category_links"
-                                            onclick="showCategoryMenus(event, '{{ str_replace(' ', '', $menuCategory['category_name']) }}')">
-                                            {{ $menuCategory['category_name'] }}
-                                        </li>
-                                    @endif
-                                    @php
-                                        $menuCategoriesCount++;
-                                    @endphp
-                                @endforeach
-                            </ul>
+                    <div class="col-md-4">
+                        <div class="our_qualities_column">
+                            <img src="{{ asset('images/original_taste_img.png') }}">
+                            <div class="caption">
+                                <h3>
+                                    Quality Foods
+                                </h3>
+                                <p>
+                                    Sit amet, consectetur adipiscing elit quisque eget maximus velit,
+                                    non eleifend libero curabitur dapibus mauris sed leo cursus aliquetcras suscipit.
+                                </p>
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="menus_tab">
+                </div>
+            </div>
+        </section>
+
+        <!-- OUR MENUS SECTION -->
+
+        <section class="our_menus" id="menus">
+            <div class="container">
+                <h2 style="text-align: center;margin-bottom: 30px">DISCOVER OUR MENUS</h2>
+                <div class="menus_tabs">
+                    <div class="menus_tabs_picker">
+                        <ul style="text-align: center;margin-bottom: 70px">
                             @php
-                                $i = 0;
+                                $menuCategoriesCount = 0;
                             @endphp
-
                             @foreach ($menuCategories as $menuCategory)
-                                @if ($i == 0)
-                                    <div class="menu_item  tab_category_content"
-                                        id="{{ str_replace(' ', '', $menuCategory['category_name']) }}"
-                                        style="display:block">
-                                        @php
-                                            $rows_menus = App\Models\Menu::where(
-                                                'category_id',
-                                                $menuCategory['category_id'],
-                                            )->get();
-                                        @endphp
-
-                                        @if ($rows_menus->isEmpty())
-                                            <div style='margin:auto'>No Available Menus for this category!</div>
-                                        @endif
-
-                                        <div class='row'>
-                                            @foreach ($rows_menus as $menu)
-                                                <div class="col-md-4 col-lg-3 menu-column">
-                                                    <div class="thumbnail" style="cursor:pointer">
-                                                        @php
-                                                            $source = asset('anotherImages/' . $menu['menu_image']);
-                                                        @endphp
-
-                                                        <div class="menu-image">
-                                                            <div class="image-preview">
-                                                                <div style="background-image: url('{{ $source }}');">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="caption">
-                                                            <h5>{{ $menu['menu_name'] }}</h5>
-                                                            <p>{{ $menu['menu_description'] }}</p>
-                                                            <span class="menu_price">${{ $menu['menu_price'] }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                @if ($menuCategoriesCount == 0)
+                                    <li class="menu_category_name tab_category_links active_category"
+                                        onclick="showCategoryMenus(event, '{{ str_replace(' ', '', $menuCategory['category_name']) }}')">
+                                        {{ $menuCategory['category_name'] }}
+                                    </li>
                                 @else
-                                    <div class="menus_categories  tab_category_content"
-                                        id="{{ str_replace(' ', '', $menuCategory['category_name']) }}">
-                                        @php
-                                            $rows_menus = App\Models\Menu::where(
-                                                'category_id',
-                                                $menuCategory['category_id'],
-                                            )->get();
-                                        @endphp
-
-                                        @if ($rows_menus->isEmpty())
-                                            <div class='no_menus_div'>No Available Menus for this category!</div>
-                                        @endif
-
-                                        <div class='row'>
-                                            @foreach ($rows_menus as $menu)
-                                                <div class="col-md-4 col-lg-3 menu-column">
-                                                    <div class="thumbnail" style="cursor:pointer">
-                                                        @php
-                                                            $source = asset('anotherImages/' . $menu['menu_image']);
-                                                        @endphp
-
-                                                        <div class="menu-image">
-                                                            <div class="image-preview">
-                                                                <div style="background-image: url('{{ $source }}');">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="caption">
-                                                            <h5>{{ $menu['menu_name'] }}</h5>
-                                                            <p>{{ $menu['menu_description'] }}</p>
-                                                            <span class="menu_price">${{ $menu['menu_price'] }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                    <li class="menu_category_name tab_category_links"
+                                        onclick="showCategoryMenus(event, '{{ str_replace(' ', '', $menuCategory['category_name']) }}')">
+                                        {{ $menuCategory['category_name'] }}
+                                    </li>
                                 @endif
-
                                 @php
-                                    $i++;
+                                    $menuCategoriesCount++;
                                 @endphp
                             @endforeach
+                        </ul>
+                    </div>
 
-                        </div>
+                    <div class="menus_tab">
+                        @php
+                            $i = 0;
+                        @endphp
+
+                        @foreach ($menuCategories as $menuCategory)
+                            @if ($i == 0)
+                                <div class="menu_item  tab_category_content"
+                                    id="{{ str_replace(' ', '', $menuCategory['category_name']) }}" style="display:block">
+                                    @php
+                                        $rows_menus = App\Models\Menu::where(
+                                            'category_id',
+                                            $menuCategory['category_id'],
+                                        )->get();
+                                    @endphp
+
+                                    @if ($rows_menus->isEmpty())
+                                        <div style='margin:auto'>No Available Menus for this category!</div>
+                                    @endif
+
+                                    <div class='row'>
+                                        @foreach ($rows_menus as $menu)
+                                            <div class="col-md-4 col-lg-3 menu-column">
+                                                <div class="thumbnail" style="cursor:pointer">
+                                                    @php
+                                                        $source = asset('anotherImages/' . $menu['menu_image']);
+                                                    @endphp
+
+                                                    <div class="menu-image">
+                                                        <div class="image-preview">
+                                                            <div style="background-image: url('{{ $source }}');">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="caption">
+                                                        <h5>{{ $menu['menu_name'] }}</h5>
+                                                        <p>{{ $menu['menu_description'] }}</p>
+                                                        <span class="menu_price">${{ $menu['menu_price'] }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @else
+                                <div class="menus_categories  tab_category_content"
+                                    id="{{ str_replace(' ', '', $menuCategory['category_name']) }}">
+                                    @php
+                                        $rows_menus = App\Models\Menu::where(
+                                            'category_id',
+                                            $menuCategory['category_id'],
+                                        )->get();
+                                    @endphp
+
+                                    @if ($rows_menus->isEmpty())
+                                        <div class='no_menus_div'>No Available Menus for this category!</div>
+                                    @endif
+
+                                    <div class='row'>
+                                        @foreach ($rows_menus as $menu)
+                                            <div class="col-md-4 col-lg-3 menu-column">
+                                                <div class="thumbnail" style="cursor:pointer">
+                                                    @php
+                                                        $source = asset('anotherImages/' . $menu['menu_image']);
+                                                    @endphp
+
+                                                    <div class="menu-image">
+                                                        <div class="image-preview">
+                                                            <div style="background-image: url('{{ $source }}');">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="caption">
+                                                        <h5>{{ $menu['menu_name'] }}</h5>
+                                                        <p>{{ $menu['menu_description'] }}</p>
+                                                        <span class="menu_price">${{ $menu['menu_price'] }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
+                            @php
+                                $i++;
+                            @endphp
+                        @endforeach
+
                     </div>
                 </div>
-        </div>
+            </div>
+            </div>
         </section>
 
         <!-- IMAGE GALLERY -->
