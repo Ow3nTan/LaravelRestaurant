@@ -83,13 +83,13 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('menu') }}" class="a-verMenu menus_link">
+                <a href="{{ url('/menus') }}" class="a-verMenu menus_link">
                     <i class="fas fa-utensils icon-ver"></i>
                     <span style="padding-left:6px;">Menus</span>
                 </a>
             </li>
             <li>
-                <a href="{{ url('gallery') }}" class="a-verMenu gallery_link">
+                <a href="{{ url('/gallery') }}" class="a-verMenu gallery_link">
                     <i class="far fa-image icon-ver"></i>
                     <span style="padding-left:6px;">Gallery</span>
                 </a>
