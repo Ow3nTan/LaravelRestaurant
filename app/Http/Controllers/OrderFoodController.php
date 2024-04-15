@@ -12,6 +12,7 @@ class OrderFoodController extends Controller
     public function index()
     {
         $menu_categories = MenuCategory::with('menus')->get();
+        // dd($menu_categories);
         return view('order_food', ['menu_categories' => $menu_categories]);
     }
 
