@@ -7,6 +7,7 @@ use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderFoodController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,8 +38,12 @@ Route::post('/ajax-files/dashboard_ajax', [DashboardController::class, 'handleAj
 
 Route::post('contact',[ContactController::class,'send']);
 Route::get('logout',[LoginController::class,'logout']);
+
+//table_reservation
+Route::post('checkAvailability',[ReservationController::class,'checkAvailability']);
+Route::post('makeReservation',[ReservationController::class,'makeReservation']);
 Route::view('tableReserve','table-reservation');
 
-// Route::view('order_food','order-food');
+//order_food
 Route::post('storeOrder',[OrderFoodController::class,'store']);
 Route::get('order_food',[OrderFoodController::class,'index']);

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Table extends Model
 {
     use HasFactory;
+
+    protected $table = 'table';
+    protected $primaryKey = 'table_id';
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
