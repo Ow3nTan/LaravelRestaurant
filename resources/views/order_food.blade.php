@@ -249,18 +249,18 @@ $pageTitle = 'Order Food';
                 @foreach ($menu_categories as $category)
                     <div class="text_header">
                         <span>
-                            {{ $category['category_name'] }}
+                            {{ $category->category_name }}
                         </span>
                     </div>
                     <div class="items_tab">
-                        @foreach ($rows as $row)
+                        @foreach ($category->menus as $row)
                             <div class='itemListElement'>
                                 <div class = 'item_details'>
-                                    <div>{{ $row['menu_name'] }}</div>
+                                    <div>{{ $row->menu_name }}</div>
                                     <div class = 'item_select_part'>
                                         <div class = 'menu_price_field'>
                                             <span style = 'font-weight: bold;'>
-                                                {{ $row['menu_price'] . "$" }}
+                                                {{ $row->menu_price . "$" }}
                                             </span>
                                         </div>
 
@@ -268,7 +268,7 @@ $pageTitle = 'Order Food';
                                             <div class="btn-group-toggle" data-toggle="buttons">
                                                 <label class="menu_label item_label btn btn-secondary">
                                                     <input type="checkbox" name="selected_menus[]"
-                                                        value={{$row['menu_id']}} autocomplete="off">Select
+                                                        value={{$row->menu_id}} autocomplete="off">Select
                                                 </label>
                                             </div>
                                         </div>

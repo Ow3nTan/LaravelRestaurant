@@ -25,7 +25,6 @@
     @php
         $pageTitle = 'Dashboard';
     @endphp
-    <x-header data="Dashboard" />
 
     <script type="text/javascript">
         var vertical_menu = document.getElementById("vertical-menu");

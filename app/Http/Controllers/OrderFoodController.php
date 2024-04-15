@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MenuCategory;
 use App\Models\Menu;
+
 class OrderFoodController extends Controller
 {
+
     public function index()
     {
-        $menu_categories = MenuCategory::all();
-        $rows = Menu::where('category_id')->get();
-        return view('order_food', ['menu_categories' => $menu_categories, 'rows' => $rows]);
+        $menu_categories = MenuCategory::with('menus')->get();
+        // dd($menu_categories);
+        return view('order_food', ['menu_categories' => $menu_categories]);
     }
+
 
     public function store(Request $request)
     {

@@ -13,6 +13,7 @@ class Client extends Model
     protected $guard = 'client';
     protected $table = 'client';
 
+    protected $fillable = ['client_id','client_name', 'client_phone', 'client_email'];
 
     public static function countItems($item, $table)
     {

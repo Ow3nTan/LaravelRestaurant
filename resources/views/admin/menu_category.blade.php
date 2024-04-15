@@ -21,7 +21,6 @@
         $pageTitle = 'Menu Categories';
         $menu_categories = MenuCategory::all();
     @endphp
-    <x-header data="Menu Categories" />
 
 
     <script type="text/javascript">
