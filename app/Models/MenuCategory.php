@@ -11,8 +11,11 @@ class MenuCategory extends Model
 
     protected $table = 'menu_category';
     protected $fillable = ['category_name'];
+    protected $primaryKey = 'category_id';
 
-    public function menu(){
+
+    public function menus()
+    {
         return $this->hasMany(Menu::class);
     }
 }
