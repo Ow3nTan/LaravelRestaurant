@@ -12,7 +12,7 @@ class Menu extends Model
     protected $table = 'menu';
     protected $fillable = ['menu_name', 'menu_price', 'category_id'];
     public function menuCategory()
-{
-    return $this->belongsTo(MenuCategory::class, 'category_id','category_id');
-}
+    {
+        return $this->belongsTo(MenuCategory::class, 'category_id', 'category_id');
+    }
 }
