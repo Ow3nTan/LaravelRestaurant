@@ -194,7 +194,7 @@ $pageTitle = 'Order Food';
             $client_id = $stmtgetCurrentClientID->fetch();
     
             $stmtClient = $con->prepare("insert into clients(client_name,client_phone,client_email) 
-                                                            values(?,?,?)");
+                                                                values(?,?,?)");
             $stmtClient->execute([$client_full_name, $client_phone_number, $client_email]);
     
             $stmtgetCurrentOrderID = $con->prepare("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'restaurant_website' AND TABLE_NAME = 'placed_orders'");
@@ -268,7 +268,7 @@ $pageTitle = 'Order Food';
                                             <div class="btn-group-toggle" data-toggle="buttons">
                                                 <label class="menu_label item_label btn btn-secondary">
                                                     <input type="checkbox" name="selected_menus[]"
-                                                        value={{$row->menu_id}} autocomplete="off">Select
+                                                        value={{ $row->menu_id }} autocomplete="off">Select
                                                 </label>
                                             </div>
                                         </div>
@@ -434,7 +434,7 @@ $pageTitle = 'Order Food';
 
 <!-- FOOTER BOTTOM  -->
 
-<x-footer/>
+<x-footer />
 
 
 <!-- JS SCRIPTS -->

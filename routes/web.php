@@ -35,12 +35,10 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('logout', [LoginController::class, 'logout']);
 Route::view('tableReserve', 'table-reservation');
-
-
-
+Route::post('checkAvailability',[ReservationController::class,'checkAvailability']);
+Route::post('makeReservation',[ReservationController::class,'makeReservation']);
 Route::post('contact', [ContactController::class, 'send']);
 Route::get('logout', [LoginController::class, 'logout']);
-Route::view('tableReserve', 'table-reservation');
 
 // /* Admin Routes */
 // Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -60,12 +58,8 @@ Route::view('tableReserve', 'table-reservation');
 
 
 //order_food
-Route::post('storeOrder',[OrderFoodController::class,'store']);
-Route::get('order_food',[OrderFoodController::class,'index']);
-
-
-Route::view('order_food','order-food');
-
+Route::post('storeOrder', [OrderFoodController::class, 'store']);
+Route::get('order_food', [OrderFoodController::class, 'index']);
 Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
 Route::get('/menus/create', [MenuController::class, 'create'])->name('menus.create');
 Route::post('/menus', [MenuController::class, 'store'])->name('menus.store');

@@ -20,7 +20,6 @@ class MenuCategoryController extends Controller
     {
         $categoryName = $request->input('category_name');
 
-        // Check if category name already exists
         $existingCategory = MenuCategory::where('category_name', $categoryName)->exists();
 
         if ($existingCategory) {
@@ -30,7 +29,6 @@ class MenuCategoryController extends Controller
             ]);
         }
 
-        // Insert new category
         MenuCategory::create([
             'category_name' => $categoryName
         ]);
@@ -45,7 +43,6 @@ class MenuCategoryController extends Controller
     {
         $categoryId = $request->input('category_id');
 
-        // Delete category
         MenuCategory::where('category_id', $categoryId)->delete();
 
         return response()->json([

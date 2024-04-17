@@ -7,6 +7,7 @@
     use App\Models\Menu;
     use App\Models\Inorder;
     use App\Models\MenuCategory;
+    use App\Http\Controllers\DashboardController;
 @endphp
 
 
@@ -171,7 +172,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
+                        {{-- @php
                             $placed_orders = PlacedOrder::with('client')
                                 ->where('canceled', 0)
                                 ->where('delivered', 0)
@@ -179,6 +180,11 @@
                                 ->get();
 
                             $count = $placed_orders->count();
+                        @endphp --}}
+                        @php
+                            $data = (new DashboardController())->getPlacedOrders();
+                            $placed_orders = $data['placed_orders'];
+                            $count = $data['count'];
                         @endphp
 
                         @if ($count == 0)
@@ -194,25 +200,35 @@
                                         {{ $order->order_time }}
                                     </td>
                                     <td>
-                                        @php
+                                        {{-- @php
                                             $menus = Menu::select('menu_name', 'quantity', 'menu_price')
                                                 ->join('in_order', 'menu.menu_id', '=', 'in_order.menu_id')
                                                 ->where('in_order.order_id', $order->order_id)
                                                 ->get();
 
                                             $total_price = 0;
+                                        @endphp --}}
+                                        @php
+                                            $orderMenusData = (new DashboardController())->getOrderMenus(
+                                                $order->order_id,
+                                            );
+                                            $menus = $orderMenusData['menus'];
+                                            $totalPrice = $orderMenusData['totalPrice'];
                                         @endphp
 
-                                        @foreach ($menus as $menu)
+                                        {{-- @foreach ($menus as $menu)
                                             <span style='display:block'>{{ $menu->menu_name }}</span>
 
                                             @php
                                                 $total_price += $menu->menu_price * $menu->quantity;
                                             @endphp
+                                        @endforeach --}}
+                                        @foreach ($menus as $menu)
+                                            <span style='display:block'>{{ $menu->menu_name }}</span>
                                         @endforeach
                                     </td>
                                     <td>
-                                        {{ $total_price }} $
+                                        {{ $totalPrice }} $
                                     </td>
                                     <td>
                                         <button class='btn btn-info btn-sm rounded-0' type='button' data-toggle='modal'
@@ -352,7 +368,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
+                        {{-- @php
                             $completedOrders = DB::table('placed_order as po')
                                 ->join('client as c', 'po.client_id', '=', 'c.client_id')
                                 ->where('po.delivered', 1)
@@ -360,7 +376,14 @@
                                 ->orderBy('po.order_time')
                                 ->get();
                             $count = count($completedOrders);
+                        @endphp --}}
+
+                        @php
+                            $completedOrdersData = (new DashboardController())->getCompletedOrders();
+                            $completedOrders = $completedOrdersData['completedOrders'];
+                            $count = $completedOrdersData['count'];
                         @endphp
+
 
                         @if ($count == 0)
                             <tr>
@@ -375,7 +398,7 @@
                                         {{ $order->order_time }}
                                     </td>
                                     <td>
-                                        @php
+                                        {{-- @php
                                             $menus = DB::table('menu')
                                                 ->join('in_order', 'menu.menu_id', '=', 'in_order.menu_id')
                                                 ->select('menu.menu_name', 'in_order.quantity')
@@ -384,7 +407,19 @@
                                         @endphp
                                         @foreach ($menus as $menu)
                                             <span style='display:block'>{{ $menu->menu_name }}</span>
+                                        @endforeach --}}
+                                        @php
+
+                                            $orderMenusData = (new DashboardController())->getOrderMenus(
+                                                $order->order_id,
+                                            );
+                                            $menus = $orderMenusData['menus'];
+                                        @endphp
+
+                                        @foreach ($menus as $menu)
+                                            <span style='display:block'>{{ $menu->menu_name }}</span>
                                         @endforeach
+
                                     </td>
                                     <td>
                                         {{ $order->client_name }}
@@ -412,13 +447,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
+                        {{-- @php
                             $cancelledOrders = PlacedOrder::with('client')
                                 ->where('canceled', 1)
                                 ->orderBy('order_time')
                                 ->get();
 
                             $count = $cancelledOrders->count();
+                        @endphp --}}
+                        @php
+                            $cancelledOrdersData = (new DashboardController())->getCancelledOrders();
+                            $cancelledOrders = $cancelledOrdersData['cancelledOrders'];
+                            $count = $cancelledOrdersData['count'];
                         @endphp
 
                         @if ($count == 0)
@@ -496,14 +536,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
+                        {{-- @php
                             $reservations = DB::table('reservation')
                                 ->where('selected_time', '>', now())
                                 ->where('canceled', 0)
                                 ->get();
                             $count = $reservations->count();
-                        @endphp
+                        @endphp --}}
 
+                        @php
+                            $recentReservationsData = (new DashboardController())->getRecentReservations();
+                            $reservations = $recentReservationsData['reservations'];
+                            $count = $recentReservationsData['count'];
+                        @endphp
                         @if ($count == 0)
                             <tr>
                                 <td colspan='5' style='text-align:center;'>
@@ -637,13 +682,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
+                        {{-- @php
                             $reservations = DB::table('reservation')
                                 ->where('selected_time', '<', now())
                                 ->where('canceled', 0)
                                 ->orderBy('selected_time')
                                 ->get();
                             $count = $reservations->count();
+                        @endphp --}}
+
+                        @php
+                            $completedReservationsData = (new DashboardController())->getCompletedReservations();
+                            $reservations = $completedReservationsData['reservations'];
+                            $count = $completedReservationsData['count'];
                         @endphp
 
                         @if ($count == 0)
@@ -684,13 +735,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
+                        {{-- @php
                             $reservations = DB::table('reservation')
                                 ->where('canceled', 1)
                                 ->orderBy('date_created')
                                 ->get();
 
                             $count = count($reservations);
+                        @endphp --}}
+
+                        @php
+                            $canceledReservationsData = (new DashboardController())->getCanceledReservations();
+                            $reservations = $canceledReservationsData['reservations'];
+                            $count = $canceledReservationsData['count'];
                         @endphp
 
                         @if ($count == 0)

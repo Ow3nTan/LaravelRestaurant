@@ -16,6 +16,9 @@
 
         <x-header />
         <x-navbar />
+        @if (Session::has('success'))
+            <p style="font-size: 20px; margin: 0px; font-weight: bold; text-align: center;">{{ Session::get('success') }}</p>
+        @endif
         <section class="home-section" id="home">
             <div class="container">
                 <div class="row" style="flex-wrap: nowrap;">
