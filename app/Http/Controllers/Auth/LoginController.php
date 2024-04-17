@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -46,6 +47,17 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
+        Session::flash('success', 'Successfully logged out!');
+
         return redirect('/home');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->isAdmin()) {
+            Session::flash('success', 'Welcome back, ' . $user->username . '! You are an Admin. You can access the Admin Dashboard.');
+        } else {
+            Session::flash('success', 'Welcome back, ' . $user->username . '!');
+        }
     }
 }

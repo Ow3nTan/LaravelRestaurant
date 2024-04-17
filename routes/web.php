@@ -48,11 +48,11 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 });
 
 //order_food
-Route::post('storeOrder',[OrderFoodController::class,'store']);
-Route::get('order_food',[OrderFoodController::class,'index']);
+Route::post('storeOrder', [OrderFoodController::class, 'store']);
+Route::get('order_food', [OrderFoodController::class, 'index']);
 
 
-Route::view('order_food','order-food');
+Route::view('order_food', 'order_food');
 
 Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
 Route::get('/menus/create', [MenuController::class, 'create'])->name('menus.create');
