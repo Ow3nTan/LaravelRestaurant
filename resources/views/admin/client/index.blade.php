@@ -1,5 +1,5 @@
 @extends('admin.layouts.admin_layout')
-<x-header data="Clients" />
+{{-- <x-header data="Clients" /> --}}
 
 @section('content')
     @php

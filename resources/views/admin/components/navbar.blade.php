@@ -18,13 +18,16 @@
                         <b class="caret"></b>
                     </a>
                     <!-- DROPDOWN MENU -->
+                    {{-- {{ route('users.edit', ['user_id' => $user->user_id]) }} --}}
+
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" {{-- href="{{ route('edit.profile', ['user_id' => session('userid_restaurant_qRewacvAqzA')]) }}"> --}}> <i class="fas fa-user-cog"></i>
+                        <a class="dropdown-item" href="{{ route('users.edit', ['user_id' => auth()->id()]) }}">
+                            <i class="fas fa-user-cog"></i>
                             <span style="padding-left:6px">
                                 Edit Profile
                             </span>
                         </a>
-                        <a class="dropdown-item" href="{{ url('website_setting') }}">
+                        <a class="dropdown-item" href="{{ route('website_settings.index') }}">
                             <i class="fas fa-cogs"></i>
                             <span style="padding-left:6px">
                                 Website Settings

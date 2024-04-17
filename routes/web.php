@@ -12,6 +12,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\UsersController;
+use App\Models\WebsiteSetting;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,22 +68,22 @@ Route::get('/menus/{menu}/edit', [MenuController::class, 'edit'])->name('menus.e
 Route::post('/menus/{menu}', [MenuController::class, 'update'])->name('menus.update');
 Route::delete('/menus/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
 
-Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
-// Route::post('/gallery/add', [GalleryController::class, 'addImage'])->name('gallery.addImage');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+Route::post('/gallery/add', [GalleryController::class, 'addImage'])->name('gallery.addImage');
 Route::post('/gallery/add', [GalleryController::class, 'store'])->name('gallery.store');
 Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 
 Route::get('/client', [ClientsController::class, 'index'])->name('clients.index');
 
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
-//     Route::get('/users/{user_id}/edit', [UsersController::class, 'edit'])->name('users.edit');
-//     Route::post('/users/{user_id}/edit', [UsersController::class, 'update'])->name('users.update');
-// });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+    Route::get('/users/{user_id}/edit', [UsersController::class, 'edit'])->name('users.edit');
+    Route::post('/users/{user_id}/edit', [UsersController::class, 'update'])->name('users.update');
+});
 
-Route::get('/users', [UsersController::class, 'index'])->name('users.index');
-// Route::get('/users/{user_id}/edit', [UsersController::class, 'edit'])->name('users.edit');
-// Route::post('/users/{user_id}/edit', [UsersController::class, 'update'])->name('users.update');
+Route::get('/website_setting', [WebsiteSettingController::class, 'index'])->name('website_settings.index');
+Route::post('/website_settings', [WebsiteSettingController::class, 'update'])->name('website_settings.update');
+
 
 Route::any('/test-catchall', function () {
     return "This is a test route to catch all methods.";
