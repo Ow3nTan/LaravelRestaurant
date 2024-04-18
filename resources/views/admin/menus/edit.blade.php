@@ -16,9 +16,9 @@
             <div class="card">
                 <div class="card-header">Edit Menu</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('menus.update', $menu) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('menus', $menu) }}" enctype="multipart/form-data">
                         @csrf
-                        @method('POST')
+                        @method('PUT')
 
                         <div class="form-group">
                             <label for="menu_name">Menu Name:</label>
