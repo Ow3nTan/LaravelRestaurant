@@ -48,15 +48,17 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 //order_food
 Route::post('storeOrder', [OrderFoodController::class, 'store']);
 Route::get('order_food', [OrderFoodController::class, 'index']);
-Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
-Route::get('/menus/create', [MenuController::class, 'create'])->name('menus.create');
-Route::post('/menus', [MenuController::class, 'store'])->name('menus.store');
-Route::get('/menus/{menu}/edit', [MenuController::class, 'edit'])->name('menus.edit');
-Route::post('/menus/{menu}', [MenuController::class, 'update'])->name('menus.update');
-Route::delete('/menus/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
+Route::get('/menus', [MenuController::class, 'index']);
 
+Route::get('/menus/create', [MenuController::class, 'create']);
+Route::post('/menus', [MenuController::class, 'store']);
+
+Route::get('/menus/{menu}/edit', [MenuController::class, 'edit']);
+Route::put('/menus/{menu}', [MenuController::class, 'update']);
+Route::delete('/menus/{menu}', [MenuController::class, 'destroy']);
+Route::get('menus', [MenuController::class, 'index']);
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
-// Route::post('/gallery/add', [GalleryController::class, 'addImage'])->name('gallery.addImage');
+    // Route::post('/gallery/add', [GalleryController::class, 'addImage'])->name('gallery.addImage');
 Route::post('/gallery/add', [GalleryController::class, 'store'])->name('gallery.store');
 Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 

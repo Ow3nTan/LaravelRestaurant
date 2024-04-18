@@ -15,7 +15,7 @@
             <div class="card">
                 <div class="card-header">Add New Menu</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('menus.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('menus') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
@@ -27,7 +27,7 @@
                             <label for="menu_category">Menu Category:</label>
                             <select class="form-control" name="menu_category" required>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
                                 @endforeach
                             </select>
                         </div>

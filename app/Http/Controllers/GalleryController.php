@@ -38,7 +38,7 @@ class GalleryController extends Controller
     public function index()
     {
         $images = ImageGallery::all();
-        return view('admin/gallery', compact('images'));
+        return view('admin/gallery', ['images'=>$images]);
     }
 
     // Store a new image
@@ -53,12 +53,12 @@ class GalleryController extends Controller
         $imagePath = $request->file('gallery_image')->store('images', 'public');
 
         // Create new image record in database
-        ImageGallery::create([
+        $images = ImageGallery::create([
             'image_name' => $request->image_name,
             'image' => $imagePath, // This stores the path of the uploaded image
         ]);
-
-        return redirect()->route('admin/gallery')->with('success', 'Image added successfully!');
+        
+        return view('admin/gallery',['images'=>$images]);
     }
 
     // Delete an image
@@ -72,7 +72,7 @@ class GalleryController extends Controller
         // Delete the image record from database
         $image->delete();
 
-        return redirect()->route('admin/gallery')->with('success', 'Image deleted successfully!');
+        return view('admin/gallery',['success', 'Image deleted successfully!']);
     }
 
 }

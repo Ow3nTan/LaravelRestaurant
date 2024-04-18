@@ -34,7 +34,7 @@
 
             <!-- ADD NEW MENU BUTTON -->
             <div class="above-table" style="margin-bottom: 1rem!important;">
-                <a href="{{ route('menus.create') }}" class="btn btn-success">
+                <a href="{{ url('menus/create') }}" class="btn btn-success">
                     <i class="fa fa-plus"></i>
                     <span>Add new Menu</span>
                 </a>
@@ -76,7 +76,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-body">
                                                         <div class="thumbnail" style="cursor:pointer">
-                                                            @php $source = "uploads/images/" . $menu['menu_image']; @endphp
+                                                            @php $source = "anotherImages/" . $menu['menu_image']; @endphp
                                                             <img src="{{ asset($source) }}" alt="{{ $menu['menu_name'] }}">
                                                             <div class="caption">
                                                                 <h3>
@@ -96,7 +96,7 @@
                                     <!-- EDIT BUTTON -->
                                     <li class="list-inline-item" data-toggle="tooltip" title="Edit">
                                         <button class="btn btn-success btn-sm rounded-0">
-                                            <a href="{{ route('menus.edit', $menu['menu_id']) }}" style="color: white;">
+                                            <a href="{{ url('menus/edit', $menu['menu_id']) }}" style="color: white;">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         </button>
