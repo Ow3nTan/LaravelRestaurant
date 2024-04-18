@@ -172,65 +172,12 @@ $pageTitle = 'Order Food';
 <x-navbar />
 <section class="order_food_section">
 
-    <?php
-    
-    if (isset($_POST['submit_order_food_form']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Selected Menus
-    
-        $selected_menus = $_POST['selected_menus'];
-    
-        //Client Details
-    
-        $client_full_name = test_input($_POST['client_full_name']);
-        $delivery_address = test_input($_POST['client_delivery_address']);
-        $client_phone_number = test_input($_POST['client_phone_number']);
-        $client_email = test_input($_POST['client_email']);
-    
-        $con->beginTransaction();
-        try {
-            $stmtgetCurrentClientID = $con->prepare("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'restaurant_website' AND TABLE_NAME = 'clients'");
-    
-            $stmtgetCurrentClientID->execute();
-            $client_id = $stmtgetCurrentClientID->fetch();
-    
-            $stmtClient = $con->prepare("insert into clients(client_name,client_phone,client_email) 
-                                                                values(?,?,?)");
-            $stmtClient->execute([$client_full_name, $client_phone_number, $client_email]);
-    
-            $stmtgetCurrentOrderID = $con->prepare("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'restaurant_website' AND TABLE_NAME = 'placed_orders'");
-    
-            $stmtgetCurrentOrderID->execute();
-            $order_id = $stmtgetCurrentOrderID->fetch();
-    
-            $stmt_order = $con->prepare('insert into placed_orders(order_time, client_id, delivery_address) values(?, ?, ?)');
-            $stmt_order->execute([Date('Y-m-d H:i'), $client_id[0], $delivery_address]);
-    
-            foreach ($selected_menus as $menu) {
-                $stmt = $con->prepare('insert into in_order(order_id, menu_id) values(?, ?)');
-                $stmt->execute([$order_id[0], $menu]);
-            }
-    
-            echo "<div class = 'alert alert-success'>";
-            echo 'Great! Your order has been created successfully.';
-            echo '</div>';
-    
-            $con->commit();
-        } catch (Exception $e) {
-            $con->rollBack();
-            echo "<div class = 'alert alert-danger'>";
-            echo $e->getMessage();
-            echo '</div>';
-        }
-    }
-    
-    ?>
-
     <!-- ORDER FOOD FORM -->
 
-    <form method="post" id="order_food_form" action="order_food.php">
+    <form method="POST" id="order_food_form" action="storeOrder">
 
         <!-- SELECT MENUS -->
-
+        @csrf
         <div class="select_menus_tab order_food_tab" id="menus_tab">
 
             <!-- ALERT MESSAGE -->
