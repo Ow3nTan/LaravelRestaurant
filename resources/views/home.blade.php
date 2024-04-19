@@ -269,7 +269,7 @@
                                 employee-owned firm pursuing a democratic design process that values everyone’s input.
                             </p>
                             <h3>
-                                {{ $restaurantName }}
+                                {{ $restaurantAddress }}
                             </h3>
                             <h4>
                                 <span>Email:</span>

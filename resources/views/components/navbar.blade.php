@@ -3,7 +3,7 @@
 <header id="header" class="header-section">
     <div class="container">
         <nav class="navbar">
-            <a href="index.php" class="navbar-brand">
+            <a href="home" class="navbar-brand">
                 <img src="{{ asset('images/restaurant-logo.png') }}" alt="Restaurant Logo" style="width: 150px;">
             </a>
             <div class="d-flex menu-wrap align-items-center">

@@ -109,4 +109,84 @@
             </table>
         </div>
     </div>
+
+    <script type="text/javascript">
+        // UPLOAD ADD IMAGE GALLERY
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#add_gallery_imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#add_gallery_imagePreview').hide();
+                    $('#add_gallery_imagePreview').fadeIn(650);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#add_gallery_imageUpload").change(function() {
+            readURL(this);
+        });
+
+        $('#add_image_bttn').click(function() {
+            var image_name = $("#image_name_input").val();
+            var image = $("#add_gallery_imageUpload").val();
+
+            if ($.trim(image_name) == "") {
+                $('#required_image_name').css('display', 'block');
+            } else {
+                $.ajax({
+                    url: "{{ route('gallery.store') }}",
+                    method: "POST",
+                    data: {
+                        image_name: image_name,
+                        image: image,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(data) {
+                        $('#add_image_result').html(data);
+                    },
+                    error: function(xhr, status, error) {
+                        alert('AN ERROR HAS BEEN ENCOUNTERED WHILE TRYING TO EXECUTE YOUR REQUEST');
+                    }
+                });
+            }
+        });
+
+        $(document).on('click', '.delete_image_bttn', function() {
+            var image_id = $(this).data('id');
+            var do_ = "Delete";
+
+            swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this image!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: "ajax_files/gallery_ajax.php",
+                            method: "POST",
+                            data: {
+                                image_id: image_id,
+                                do: do_
+                            },
+                            success: function(response) {
+                                swal("Poof! Your image has been deleted!", {
+                                    icon: "success",
+                                });
+                                location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                swal("Oops!", "An error occurred: " + xhr.responseText, "error");
+                            }
+                        });
+                    }
+                });
+        });
+    </script>
 @endsection

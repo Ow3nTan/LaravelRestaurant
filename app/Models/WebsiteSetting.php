@@ -10,4 +10,5 @@ class WebsiteSetting extends Model
     use HasFactory;
 
     protected $table = 'website_setting';
+    protected $fillable = ['option_name', 'option_value'];
 }

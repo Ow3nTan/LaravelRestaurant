@@ -8,11 +8,10 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    //
     public function index()
     {
-        $menus = Menu::with('category')->get();
-        return view('admin/menus/index', compact('menus'));
+        $menus = Menu::with('menuCategory')->get();
+        return view('admin/menus/menus', compact('menus'));
     }
 
     public function create()
@@ -23,60 +22,72 @@ class MenuController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'menu_name' => 'required|string|max:255',
-            'menu_category' => 'required|exists:menu_category,category_id',
-            'menu_description' => 'required|string|max:200',
-            'menu_price' => 'required|numeric',
-            'menu_image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
-        ]);
 
-        $path = $request->file('menu_image')->store('menus', 'public');
+        // dd($request);
+        // $request->validate([
+        //     'menu_name' => 'required|string|max:255',
+        //     'menu_description' => 'required|string|max:255',
+        //     'menu_price' => 'required|numeric|min:0',
+        //     'category_id' => 'required|exists:menu_category,category_id',
+        //     'menu_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
+
+        $imagePath = $request->file('menu_image')->store('images','public');
+        dd($request->category_id);
+
         Menu::create([
-            'name' => $request->menu_name,
-            'description' => $request->menu_description,
-            'price' => $request->menu_price,
-            'image' => $path,
-            'category_id' => $request->menu_category
+            'menu_name' => $request->menu_name,
+            'menu_description' => $request->menu_description,
+            'menu_price' => $request->menu_price,
+            'category_id' => $request->category_id,
+            'menu_image' => $imagePath
         ]);
 
-        return redirect()->route('admin/menus.index')->with('success', 'Menu added successfully');
+        // $menu->menuimage = $imagePath;
+        // $menu->save();
+
+        // $data = $request->all();
+        // Menu::create($data);
+
+        return redirect('menus')->with('success', 'Menu created successfully.');
     }
 
     public function edit(Menu $menu)
     {
         $categories = MenuCategory::all();
-        return view('/admin/menus.edit', compact('menu', 'categories'));
+        return view('admin/menus/edit', compact('menu', 'categories'));
     }
 
     public function update(Request $request, Menu $menu)
     {
         $request->validate([
             'menu_name' => 'required|string|max:255',
-            'menu_category' => 'required|exists:menu_category,category_id',
-            'menu_description' => 'required|string|max:200',
-            'menu_price' => 'required|numeric',
-            'menu_image' => 'image|mimes:jpeg,png,jpg|max:2048'
+            'menu_description' => 'required|string|max:255',
+            'menu_price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:menu_category,category_id',
+            'menu_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        $menu->menu_name = $request->menu_name;
+        $menu->menu_description = $request->menu_description;
+        $menu->menu_price = $request->menu_price;
+        $menu->category_id = $request->category_id;
 
         if ($request->hasFile('menu_image')) {
-            $path = $request->file('menu_image')->store('menus', 'public');
-            $menu->update(['image' => $path]);
+            $imagePath = $request->file('menu_image')->store('../../../public/anotherImages', 'public');
+            $menu->menu_image = $imagePath;
         }
 
-        $menu->update([
-            'name' => $request->menu_name,
-            'description' => $request->menu_description,
-            'price' => $request->menu_price,
-            'category_id' => $request->category_id
-        ]);
+        $menu->save(); 
 
-        return redirect()->route('admin/menus.index')->with('success', 'Menu updated successfully');
+        return redirect('menus')->with('success', 'Menu updated successfully.');
     }
 
     public function destroy(Menu $menu)
     {
+        Storage::delete('public/' . $menu->image);
         $menu->delete();
-        return redirect()->route('admin/menus.index')->with('success', 'Menu deleted successfully');
+
+        return redirect('menus')->with('success', 'Menu deleted successfully.');
     }
 }
