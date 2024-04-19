@@ -20,7 +20,7 @@ class CreateMenuTable extends Migration
             $table->decimal('menu_price', 6, 2);
             $table->string('menu_image', 255);
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('category_id')->on('menu_categorie');
+            $table->foreign('category_id')->references('category_id')->on('menu_category');
             $table->timestamps();
         });
     }
